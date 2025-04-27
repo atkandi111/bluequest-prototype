@@ -1,0 +1,12 @@
+:root {
+    --color-gray: #eff0f2;
+    --color-dark: #292929;
+    --color-light: #ffffff;
+    --color-blue-light: #3998ff;
+    --color-blue-dark: #004aad;
+    --color-yellow: #fff9c7;
+    --color-green: #b1d8b7;
+
+    --text-color: #292929;
+    --font-family: 'Arial, sans-serif';
+}
