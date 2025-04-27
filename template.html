@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap" rel="stylesheet">
+    <title>Container Component</title>
+    <style>
+        
+        /* Container styles */
+        .custom-container {
+            max-width: 800px;
+            margin: 20px auto;
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+        }
+        .container-title {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: white;
+            padding: 0 10px;
+            font-size: large;
+            font-family: "Raleway";
+            font-weight: bold;
+        }
+
+        /* Input field styling */
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+        .input-field {
+            width: 100%;
+            max-width: 220px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+        .input-field:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 5px rgba(0, 102, 255, 0.3);
+        }
+
+        /* Button - General */
+        .btn {
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.01s ease;
+            border: none;
+            font-size: 14px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+
+        /* Submit button - blue */
+        .btn-submit {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+        }
+        .btn-submit:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+        }
+
+        .match {
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+
+        /* Medium Match button - light yellow */
+        .medium-match {
+            background-color: #fffbc8;
+            color: #333;
+            border: 1px solid #e6e0a3;
+        }
+
+        /* High Match button - green */
+        .high-match {
+            background-color: #a8e6cf;
+            color: #333;
+            border: 1px solid #8dccb8;
+        }
+
+        /* Keyword button - light style */
+        .keyword-light {
+            background-color: transparent;
+            border: 1px solid #aaa;
+            padding: 6px 15px;
+            color: #333;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .keyword-light:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Keyword button - dark style */
+        .keyword-dark {
+            background-color: #333;
+            border: 1px solid #222;
+            padding: 6px 15px;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .keyword-dark:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Example usage of the container component -->
+    <div class="custom-container">
+        <div class="container-title">Container</div>
+        <div class="container-content">
+            <label class="input-label">Input Field:</label>
+            <input type="text" class="input-field">
+            
+            <!-- You can add more content here -->
+        </div>
+    </div>
+
+    <div class="custom-container">
+        <div class="container-title">Button Examples</div>
+        
+        <!-- Action buttons -->
+            <button class="btn btn-submit">Submit</button>
+            <label class="match medium-match">Medium Match</label>
+            <label class="match high-match">High Match</label>
+        
+        <!-- Keyword buttons -->
+            <button class="btn keyword-light">Keyword</button>
+            <button class="btn keyword-dark">Keyword</button>
+    </div>
+
+    <!-- JavaScript to make it interactive -->
+    <script>
+
+    // Add click event listeners to all buttons
+    document.addEventListener('DOMContentLoaded', function() {
+            // Helper function to add active state
+            function setupButtonListeners(selector) {
+                const buttons = document.querySelectorAll(selector);
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        console.log(`${button.textContent} button clicked`);
+                        
+                        // Add visual feedback
+                        button.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            button.style.transform = 'scale(1)';
+                        }, 150);
+                        
+                        if (button.classList.contains('keyword-light')) {
+                            button.classList.remove('keyword-light');
+                            button.classList.add('keyword-dark');
+                        } else if (button.classList.contains('keyword-dark')) {
+                            button.classList.remove('keyword-dark');
+                            button.classList.add('keyword-light');
+                        }
+                    });
+                });
+            }
+            
+            // Setup listeners for all button types
+            setupButtonListeners('.btn');
+            setupButtonListeners('.keyword-light');
+            setupButtonListeners('.keyword-dark');
+        });
+
+    </script>
+</body>
+</html>

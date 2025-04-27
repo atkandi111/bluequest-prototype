@@ -187,7 +187,19 @@
             font-size: 16px;
             cursor: pointer;
             float: right;
-            text-decoration: none;;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background-color: #3399ff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            float: left;
+            text-decoration: none;
         }
         
         .submit-btn:hover {
@@ -232,6 +244,45 @@
                 background-color: #444;
                 color: white;
             }
+        }
+
+        .search-form {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding-left: 40px;  /* Space for the icon inside the input */
+            padding-right: 30px; /* Optional, space for any other elements like a clear button */
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;  /* Position the icon inside the input field */
+            top: 50%;    /* Vertically center the icon */
+            transform: translateY(-50%);
+        }
+
+        .keyword-btn {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.01s ease;
+            border: none;
+            font-size: 12px;
+            border: 1.5px solid black;
+        }
+        
+        .keyword-btn[active] {
+            background-color: #333;
+            border: 1px solid #222;
+            padding: 6px 15px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1.5px solid #333;
         }
         
         @media (max-width: 768px) {
@@ -285,33 +336,46 @@
             
             <form id="profileForm">
                 <div class="form-container">
-                    <div class="form-heading">Basic Information</div>
+                    <div class="form-heading">Keywords</div>
                     
                     <div class="form-row">
                         <div class="form-group" style="max-width: 500px; margin-top: 20px;">
-                            <label class="form-label">Title of the Study:</label>
-                            <input type="text" class="form-control" placeholder="ex: The purpose of this ___ is to study the relationship between ___ and ___">
+                            <div class="search-form">
+                                <input type="text" id="search" name="query" placeholder="Search for keywords" class="search-input form-control">
+                                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
-                        <div class="form-group" style="max-width: 300px;">
-                            <label class="form-label">Researcher/s:</label>
-                            <div id="input-list-container"></div>
-                            <button id="add-button" type="button">+ add a contributor</button>
+                        <div class="form-group" style="max-width: 500px; margin-top: 20px;">
+                            <label class="form-label">Suggested keywords based on your Abstract:</label>
+                            <div id="keyword-container">
+                                <button type="button" class="keyword-btn">JavaScript</button>
+                                <button type="button" class="keyword-btn">HTML</button>
+                                <button type="button" class="keyword-btn">CSS</button>
+                                <button type="button" class="keyword-btn">Python</button>
+                                <button type="button" class="keyword-btn">Django</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Selected Keywords</label>
+                            <textarea disabled rows="8" class="form-control" id="selected-keywords"></textarea>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Abstract:</label>
-                            <textarea type="text" rows="8" class="form-control" placeholder="Maximum 500 Words"></textarea>
+                            <a href="create-study.html" class="back-btn">Back</a>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
                         <div class="form-group">
-                            <a href="keywords.html" class="submit-btn">Next</a>
+                            <a href="questions.html" class="submit-btn">Next</a>
                         </div>
                     </div>
                 </div>
@@ -320,54 +384,24 @@
     </div>
     
     <script>
-        const container = document.getElementById('input-list-container');
-        const addButton = document.getElementById('add-button');
-    
-        // Function to create a new input item with remove button
-        function createInputItem() {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'input-item';
+        const container = document.getElementById('keyword-container');
+        const output   = document.getElementById('selected-keywords');
 
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.name = 'items[]';
-            input.className = 'form-control';
-            input.placeholder = 'Enter value';
+        // Attach one click-handler via event delegation
+        container.addEventListener('click', e => {
+            if (!e.target.matches('.keyword-btn')) return;
 
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button';
-            removeBtn.className = 'remove-button';
-            removeBtn.textContent = '✕';
-            removeBtn.addEventListener('click', () => {
-                container.removeChild(wrapper);
-                updateRemoveButtons();
-            });
+            // Toggle the active attribute
+            e.target.toggleAttribute('active');
 
-            wrapper.appendChild(input);
-            wrapper.appendChild(removeBtn);
-            return wrapper;
-        }
-    
-        // Enable or disable remove buttons based on count
-        function updateRemoveButtons() {
-            const items = container.querySelectorAll('.input-item');
-            items.forEach(item => {
-                const btn = item.querySelector('button.remove-button');
-                btn.disabled = items.length <= 1;
-            });
-        }
-    
-        // Add button handler
-        addButton.addEventListener('click', () => {
-            const newItem = createInputItem();
-            container.appendChild(newItem);
-            updateRemoveButtons();
+            // Update the textarea
+            const actives = Array.from(container.querySelectorAll('.keyword-btn[active]'))
+                .map(btn => btn.textContent.trim());
+
+            output.value = actives.length ? actives.join(', ') : '';
+            output.placeholder = actives.length ? '' : 'No keywords selected';
         });
     
-        // Initialize with one input field
-        container.appendChild(createInputItem());
-        updateRemoveButtons();
-
         document.addEventListener('DOMContentLoaded', function() {
             function addField() {
                 const container = document.getElementById('fieldContainer');
