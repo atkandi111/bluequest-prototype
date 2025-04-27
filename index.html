@@ -1,12 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0;url=pages/page1.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueQuest - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+        
+        .blue {
+            color: #0066cc;
+        }
+        
+        .quest {
+            color: #3399ff;
+        }
+        
+        .q-circle {
+            color: #c0c0c0;
+        }
+        
+        .login-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .login-box {
+            flex: 1;
+            border: 2px solid #ccc;
+            border-radius: 30px;
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .login-title {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .login-role {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .sign-in-btn {
+            background-color: #3399ff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .sign-in-btn:hover {
+            background-color: #0066cc;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            top: -80px;
+            right: -100px;
+        }
+        
+        .tooltip-text {
+            background-color: #0055a5;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #0055a5;
+            bottom: -15px;
+            right: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+            
+            .tooltip {
+                position: static;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <p></p>
+    <div class="container">
+        <h1>Welcome to</h1>
+        <h1 class="logo">
+            <span class="blue">Blue</span><span class="q-circle">Q</span><span class="quest">uest</span>
+        </h1>
+        
+        <div class="login-container">
+            <div class="login-box">
+                <h2 class="login-title">Login / Sign up as a <span class="login-role">Researcher</span></h2>
+                <div>
+                    <label class="label">Email:</label>
+                    <input type="email" id="researcher-email">
+                </div>
+                <div>
+                    <label class="label">Password:</label>
+                    <input type="password" id="researcher-password">
+                </div>
+                <a href="/pages/crete-study.html/" class="sign-in-btn">Sign In</a>
+            </div>
+            
+            <div class="login-box">
+                <h2 class="login-title">Login / Sign up as a <span class="login-role">Respondent</span></h2>
+                <div>
+                    <label class="label">Email:</label>
+                    <input type="email" id="respondent-email">
+                </div>
+                <div>
+                    <label class="label">Password:</label>
+                    <input type="password" id="respondent-password">
+                </div>
+                <a href="/pages/crete-study.html/" class="sign-in-btn">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signInButtons = document.querySelectorAll('.sign-in-btn');
+            
+            signInButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const parent = this.closest('.login-box');
+                    const email = parent.querySelector('input[type="email"]').value;
+                    const password = parent.querySelector('input[type="password"]').value;
+                    
+                    if (!email || !password) {
+                        alert('Please enter both email and password');
+                        return;
+                    }
+                    
+                    // This would normally connect to a backend
+                    alert('Login attempted with email: ' + email);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
