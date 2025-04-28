@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap" rel="stylesheet">
+    <title>Survey Form</title>
+    <style>
+
+/* Container styles */
+.custom-container {
+            max-width: 800px;
+            margin: 20px auto;
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+        }
+        .container-title {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: white;
+            padding: 0 10px;
+            font-size: large;
+            font-family: "Raleway";
+            font-weight: bold;
+        }
+
+        /* Input field styling */
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+        .input-field {
+            width: 100%;
+            max-width: 220px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+        .input-field:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 5px rgba(0, 102, 255, 0.3);
+        }
+
+        /* Button - General */
+        .btn {
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.01s ease;
+            border: none;
+            font-size: 14px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+
+        /* Submit button - blue */
+        .btn-submit {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+        }
+        .btn-submit:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+        }
+
+        .match {
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+
+        /* Medium Match button - light yellow */
+        .medium-match {
+            background-color: #fffbc8;
+            color: #333;
+            border: 1px solid #e6e0a3;
+        }
+
+        /* High Match button - green */
+        .high-match {
+            background-color: #a8e6cf;
+            color: #333;
+            border: 1px solid #8dccb8;
+        }
+
+        /* Keyword button - light style */
+        .keyword-light {
+            background-color: transparent;
+            border: 1px solid #aaa;
+            padding: 6px 15px;
+            color: #333;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .keyword-light:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Keyword button - dark style */
+        .keyword-dark {
+            background-color: #333;
+            border: 1px solid #222;
+            padding: 6px 15px;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .keyword-dark:hover {
+            background-color: #444;
+        }
+
+        /*--------------------------------------------------------------*/
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            display: flex;
+            font-size: medium;
+            font-family: "Raleway";
+        }
+
+        /* Main content styles */
+        .main-content {
+            margin-left: 83px;
+            padding: 20px;
+            width: calc(100% - 83px);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Survey form styles */
+        .survey-form {
+            width: 100%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .form-title {
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #444;
+            text-align: center;
+            font-weight: 600;
+            font-size: x-large;
+            font-family: "Raleway";
+        }
+
+        .form-question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            font-size: medium;
+            font-family: "Raleway";
+        }
+
+        .question-text {
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: medium;
+            font-family: "Raleway";
+        }
+
+        .question-number {
+            font-weight: bold;
+            margin-right: 5px;
+            font-size: medium;
+            font-family: "Raleway";
+        }
+
+        /* Radio buttons styling */
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .radio-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .radio-circle.selected {
+            border: 2px solid #333;
+        }
+
+        .radio-circle.selected::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #333;
+        }
+
+        .radio-label {
+            font-size: 15px;
+        }
+
+        /* Checkbox styling */
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-square {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #333;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .checkbox-square.checked {
+            background-color: #333;
+            position: relative;
+        }
+
+        .checkbox-square.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            position: absolute;
+        }
+
+        .checkbox-label {
+            font-size: 15px;
+        }
+
+        /* "Other" input styling */
+        .other-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .other-text {
+            margin-left: 5px;
+            border-bottom: 1px solid #333;
+            padding: 2px 5px;
+            font-style: italic;
+            font-size: medium;
+            font-family: "Raleway";
+        }
+
+        /* Navigation buttons */
+        .form-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            padding: 10px 25px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: "Raleway";
+        }
+
+        .back-button {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .submit-button {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .page-indicator {
+            background-color: #a8e6cf;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="survey-form">
+            <h2 class="form-title">Laughing All the Way to the Finish Line: The Impact of Comedy on Sports Performance and Audience Engagement</h2>
+            
+            <!-- Question 20 -->
+            <div class="form-question">
+                <p class="question-text"><span class="question-number">20.</span> How likely are you to watch a sporting event if you know it incorporates elements of comedy, such as comedic commentary or halftime shows?</p>
+                
+                <div class="radio-option">
+                    <div class="radio-circle selected"></div>
+                    <div class="radio-label">Likely</div>
+                </div>
+                
+                <div class="radio-option">
+                    <div class="radio-circle"></div>
+                    <div class="radio-label">Neutral</div>
+                </div>
+                
+                <div class="radio-option">
+                    <div class="radio-circle"></div>
+                    <div class="radio-label">Unlikely</div>
+                </div>
+            </div>
+            
+            <!-- Question 21 -->
+            <div class="form-question">
+                <p class="question-text"><span class="question-number">21.</span> What types of comedic elements do you find most effective in enhancing your enjoyment of sports events? (Select all that apply.)</p>
+                
+                <div class="checkbox-option">
+                    <div class="checkbox-square checked"></div>
+                    <div class="checkbox-label">Stand-up Comedy</div>
+                </div>
+                
+                <div class="checkbox-option">
+                    <div class="checkbox-square checked"></div>
+                    <div class="checkbox-label">Comedy Skits</div>
+                </div>
+                
+                <div class="checkbox-option">
+                    <div class="checkbox-square checked"></div>
+                    <div class="checkbox-label">Funny Commentary</div>
+                </div>
+                
+                <div class="checkbox-option">
+                    <div class="checkbox-square"></div>
+                    <div class="checkbox-label">Prank Segments</div>
+                </div>
+                
+                <div class="checkbox-option other-option">
+                    <div class="checkbox-square checked"></div>
+                    <div class="checkbox-label">Others: <span class="other-text">Improv Comedy</span></div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="form-nav">
+                <button class="btn btn-submit">Back</button>
+                <div class="page-indicator">Page 6 / 6</div>
+                <button class="btn btn-submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Basic functionality for radio buttons
+        document.querySelectorAll('.radio-circle').forEach(radio => {
+            radio.addEventListener('click', function() {
+                // Remove selected class from all radio buttons in the same group
+                const questionDiv = this.closest('.form-question');
+                questionDiv.querySelectorAll('.radio-circle').forEach(r => {
+                    r.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked radio button
+                this.classList.add('selected');
+            });
+        });
+        
+        // Basic functionality for checkboxes
+        document.querySelectorAll('.checkbox-square').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.classList.toggle('checked');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap" rel="stylesheet">
+    <title>Customer Information Page</title>
+    <style>
+
+           
+        /* Container styles */
+        .custom-container {
+            max-width: 800px;
+            margin: 20px auto;
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+        }
+        .container-title {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: white;
+            padding: 0 10px;
+            font-size: large;
+            font-family: "Raleway";
+            font-weight: bold;
+        }
+
+        /* Input field styling */
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+        .input-field {
+            width: 100%;
+            max-width: 220px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+        .input-field:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 5px rgba(0, 102, 255, 0.3);
+        }
+
+        /* Button - General */
+        .btn {
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.01s ease;
+            border: none;
+            font-size: 14px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+
+        /* Submit button - blue */
+        .btn-submit {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+            float: right;
+            margin-top: 20px;
+        }
+        .btn-submit:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+        }
+
+        .match {
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size:medium;
+            font-family: "Raleway";
+        }
+
+        /* Medium Match button - light yellow */
+        .medium-match {
+            background-color: #fffbc8;
+            color: #333;
+            border: 1px solid #e6e0a3;
+        }
+
+        /* High Match button - green */
+        .high-match {
+            background-color: #a8e6cf;
+            color: #333;
+            border: 1px solid #8dccb8;
+        }
+
+        /* Keyword button - light style */
+        .keyword-light {
+            background-color: transparent;
+            border: 1px solid #aaa;
+            padding: 6px 15px;
+            color: #333;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .keyword-light:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Keyword button - dark style */
+        .keyword-dark {
+            background-color: #333;
+            border: 1px solid #222;
+            padding: 6px 15px;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .keyword-dark:hover {
+            background-color: #444;
+        }
+
+        /* --------------------------------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Raleway";
+        }
+        
+        body {
+            display: flex;
+            height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .search-bar {
+            flex: 1;
+            margin-left: 20px;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding-left: 40px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .customer-info {
+            margin-top: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .form-row {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-right: 20px;
+        }
+        
+        .form-group:last-child {
+            margin-right: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .payout-summary {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            max-width: 300px;
+            float: right;
+        }
+        
+        .payout-summary h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .payout-box {
+            height: 150px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .total-button {
+            background-color: #8cd98c;
+            color: black;
+            padding: 5px 15px;
+            border-radius: 15px;
+            border: none;
+        }
+        
+        .total-amount {
+            font-weight: bold;
+        }
+        
+        .content-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .form-container {
+            flex: 1;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="main-content">
+        <div class="nav-bar">
+            <a href="#" class="btn keyword-light">Home</a>
+            <a href="#" class="btn keyword-light">Rewards</a>
+            <a href="#" class="btn keyword-dark">Cash Out</a>
+            <div class="search-bar">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+        
+        <div class="content-container">
+            <div class="form-container">
+                <h1>Customer Info</h1>
+                
+                <h2>Billing Information</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">*First Name</label>
+                        <input type="text" id="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">*Last Name</label>
+                        <input type="text" id="lastName">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gcashNumber">GCash Number</label>
+                        <input type="text" id="gcashNumber" placeholder="e.g. 09171234567">
+                    </div>
+                    <div class="form-group">
+                        <label for="bankDetails">Bank Details</label>
+                        <input type="text" id="bankDetails">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payout-summary">
+                <h2>Payout Summary</h2>
+                <div class="payout-box"></div>
+                <div class="total-row">
+                    <button class="total-button">Total</button>
+                    <span class="total-amount">₱0.00</span>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn btn-submit">Submit</button>
+    </div>
+</body>
+</html>
